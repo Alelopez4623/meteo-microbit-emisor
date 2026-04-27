@@ -19,6 +19,28 @@ input.onButtonPressed(Button.A, function () {
         `)
     basic.clearScreen()
 })
+radio.onReceivedString(function (receivedString) {
+    if ("quiero" == receivedString) {
+        radio.sendValue("temp", pins.analogReadPin(AnalogPin.P0) * 330 / 1023)
+        basic.showLeds(`
+            . . # . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        basic.clearScreen()
+        radio.sendValue("temp2", input.temperature())
+        basic.showLeds(`
+            . . . . #
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        basic.clearScreen()
+    }
+})
 // **Opcional**
 // Envio de información/emegencia para la otra micro:bit
 input.onButtonPressed(Button.B, function () {
